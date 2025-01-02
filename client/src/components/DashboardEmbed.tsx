@@ -23,14 +23,14 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
   };
 
   return (
-    <Card className="w-full h-full min-h-[500px] overflow-hidden">
+    <Card className="w-full h-full">
       <CardContent className="p-0 h-full relative">
         {isLoading && (
           <div className="absolute inset-0 p-4">
             <Skeleton className="w-full h-full" />
           </div>
         )}
-        
+
         {hasError && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
             <div className="text-center">
@@ -44,7 +44,7 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
         <iframe 
           src={url}
           title={title}
-          className="w-full h-full min-h-[500px] border-0"
+          className="w-full h-full border-0"
           onLoad={handleLoad}
           onError={handleError}
           allow="fullscreen"
