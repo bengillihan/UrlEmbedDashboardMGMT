@@ -6,9 +6,9 @@ export function DashboardGrid() {
   return (
     <div className="flex">
       <Tabs defaultValue={DASHBOARD_URLS[0].id} orientation="vertical" className="flex w-full">
-        <TabsList className="flex flex-col h-screen border-r bg-muted/50 w-48">
+        <TabsList className="flex flex-col h-screen border-r bg-muted/50 w-48 pl-2">
           {DASHBOARD_URLS.map((dashboard) => (
-            <TabsTrigger key={dashboard.id} value={dashboard.id} className="justify-start">
+            <TabsTrigger key={dashboard.id} value={dashboard.id} className="justify-start w-full text-left">
               {dashboard.title}
             </TabsTrigger>
           ))}
