@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface DashboardEmbedProps {
   url: string;
@@ -11,10 +12,16 @@ interface DashboardEmbedProps {
 export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [needsAuth, setNeedsAuth] = useState(false);
 
-  const handleLoad = () => {
+  const handleLoad = (event: React.SyntheticEvent<HTMLIFrameElement>) => {
     setIsLoading(false);
     setHasError(false);
+    // Check if we're redirected to a login page
+    const frame = event.target as HTMLIFrameElement;
+    if (frame.contentWindow?.location.href.includes('/login')) {
+      setNeedsAuth(true);
+    }
   };
 
   const handleError = () => {
@@ -22,10 +29,10 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
     setHasError(true);
   };
 
-  // Add auth token to Salesflow URL if it's the Salesflow dashboard
-  const embedUrl = url.includes('sales-service-portal-bdgillihan.replit.app') 
-    ? `${url}?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE0MTAxMzYsImlhdCI6MTczNTg1ODEzNiwic3ViIjoiZGFzaGJvYXJkX2VtYmVkIiwidXNlcl9pZCI6MSwiZW1haWwiOiJiZW5naWxsaWhhbkBhbXBvd2Vyc3lzLmNvbSJ9.W8vHe57Wi-WlbQxcS0l9juCzW4HJXgnI3-I4gu6OZZo`
-    : url;
+  const handleLogin = () => {
+    // Open Salesflow in a new tab for authentication
+    window.open(url, '_blank');
+  };
 
   return (
     <Card className="w-full h-full">
@@ -46,8 +53,21 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
           </div>
         )}
 
+        {needsAuth && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+            <div className="text-center">
+              <AlertCircle className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Authentication Required</h3>
+              <p className="text-sm text-gray-600 mb-4">Please log in to view the {title} dashboard</p>
+              <Button onClick={handleLogin}>
+                Log In to {title}
+              </Button>
+            </div>
+          </div>
+        )}
+
         <iframe 
-          src={embedUrl}
+          src={url}
           title={title}
           className="w-full h-full border-0"
           onLoad={handleLoad}
