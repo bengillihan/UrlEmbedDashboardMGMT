@@ -14,17 +14,6 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
   const [hasError, setHasError] = useState(false);
   const [key, setKey] = useState(0); // Used to force iframe refresh
 
-  useEffect(() => {
-    // Only set up refresh for Salesflow dashboard
-    if (url.includes('sales-service-portal-bdgillihan')) {
-      const refreshInterval = setInterval(() => {
-        setKey(prev => prev + 1); // Force iframe refresh
-      }, 5000); // Check every 5 seconds
-
-      return () => clearInterval(refreshInterval);
-    }
-  }, [url]);
-
   const handleLoad = () => {
     setIsLoading(false);
     setHasError(false);
@@ -38,7 +27,10 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
   const handleLogin = () => {
     // Open dashboard in a new tab and start refresh cycle
     window.open(url, '_blank');
-    setKey(prev => prev + 1); // Immediately attempt a refresh
+  };
+
+  const handleRefresh = () => {
+    setKey(prev => prev + 1); // Force iframe refresh
   };
 
   return (
@@ -60,8 +52,15 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
                 Open {title} in New Tab
               </Button>
               <p className="text-sm text-gray-500 mt-4">
-                After logging in, return to this tab to view the dashboard
+                After logging in, return to this tab and click refresh below
               </p>
+              <Button 
+                onClick={handleRefresh}
+                variant="outline"
+                className="mt-2"
+              >
+                Refresh Dashboard
+              </Button>
             </div>
           </div>
         )}
