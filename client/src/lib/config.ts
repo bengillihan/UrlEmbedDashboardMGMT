@@ -1,7 +1,7 @@
 export const DASHBOARD_URLS = [
   {
     id: 'sales',
-    url: 'https://sales-service-portal-bdgillihan.replit.app/embed/dashboard?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE0MTAxMzYsImlhdCI6MTczNTg1ODEzNiwic3ViIjoiZGFzaGJvYXJkX2VtYmVkIiwidXNlcl9pZCI6MSwiZW1haWwiOiJiZW5naWxsaWhhbkBhbXBvd2Vyc3lzLmNvbSJ9.W8vHe57Wi-WlbQxcS0l9juCzW4HJXgnI3-I4gu6OZZo',
+    url: 'https://sales-service-portal-bdgillihan.replit.app/dashboard',
     title: 'Salesflow'
   },
   {
