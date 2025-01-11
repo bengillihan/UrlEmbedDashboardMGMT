@@ -22,6 +22,11 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
     setHasError(true);
   };
 
+  // Add auth token to Salesflow URL if it's the Salesflow dashboard
+  const embedUrl = url.includes('sales-service-portal-bdgillihan.replit.app') 
+    ? `${url}?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTE0MTAxMzYsImlhdCI6MTczNTg1ODEzNiwic3ViIjoiZGFzaGJvYXJkX2VtYmVkIiwidXNlcl9pZCI6MSwiZW1haWwiOiJiZW5naWxsaWhhbkBhbXBvd2Vyc3lzLmNvbSJ9.W8vHe57Wi-WlbQxcS0l9juCzW4HJXgnI3-I4gu6OZZo`
+    : url;
+
   return (
     <Card className="w-full h-full">
       <CardContent className="p-0 h-full relative">
@@ -42,7 +47,7 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
         )}
 
         <iframe 
-          src={url}
+          src={embedUrl}
           title={title}
           className="w-full h-full border-0"
           onLoad={handleLoad}
