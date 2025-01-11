@@ -13,5 +13,10 @@ export const DASHBOARD_URLS = [
     id: 'quickbase',
     url: 'https://americanpower.quickbase.com/db/bp5hq3uqm/813bccff-c7f4-4298-aa2d-aa36e57ea55e',
     title: 'QuickBase'
+  },
+  {
+    id: 'test-salesflow',
+    url: 'https://22762c29-3853-49fd-8fab-68c62fe53f01-00-ne1gi181pknk.kirk.replit.dev/',
+    title: 'Test Salesflow'
   }
 ] as const;
