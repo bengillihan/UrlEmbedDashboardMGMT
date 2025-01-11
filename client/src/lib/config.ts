@@ -7,7 +7,7 @@ export const DASHBOARD_URLS = [
   {
     id: 'powerbi',
     url: 'https://app.powerbi.com/reportEmbed?reportId=db4665f9-bb0f-42ef-ac87-a0172e6573fb&autoAuth=true&ctid=4fa2dc50-679e-4e7f-9953-0b4a5c3291be',
-    title: 'Power BI Report'
+    title: 'PowerBI'
   },
   {
     id: 'quickbase',
