@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { AlertCircle } from 'lucide-react';
@@ -12,6 +12,18 @@ interface DashboardEmbedProps {
 export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [key, setKey] = useState(0); // Used to force iframe refresh
+
+  useEffect(() => {
+    // Only set up refresh for Salesflow dashboard
+    if (url.includes('sales-service-portal-bdgillihan')) {
+      const refreshInterval = setInterval(() => {
+        setKey(prev => prev + 1); // Force iframe refresh
+      }, 5000); // Check every 5 seconds
+
+      return () => clearInterval(refreshInterval);
+    }
+  }, [url]);
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -24,8 +36,9 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
   };
 
   const handleLogin = () => {
-    // Open dashboard in a new tab
+    // Open dashboard in a new tab and start refresh cycle
     window.open(url, '_blank');
+    setKey(prev => prev + 1); // Immediately attempt a refresh
   };
 
   return (
@@ -46,11 +59,15 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
               <Button onClick={handleLogin}>
                 Open {title} in New Tab
               </Button>
+              <p className="text-sm text-gray-500 mt-4">
+                After logging in, return to this tab to view the dashboard
+              </p>
             </div>
           </div>
         )}
 
         <iframe 
+          key={key} // Force refresh when key changes
           src={url}
           title={title}
           className="w-full h-full border-0"
