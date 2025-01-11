@@ -74,6 +74,7 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
           onLoad={handleLoad}
           onError={handleError}
           allow="fullscreen"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
         />
       </CardContent>
     </Card>
