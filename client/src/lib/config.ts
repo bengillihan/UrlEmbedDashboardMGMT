@@ -6,7 +6,7 @@ export const DASHBOARD_URLS = [
   },
   {
     id: 'powerbi',
-    url: 'https://app.powerbi.com/links/-MBqMDf8wg?ctid=4fa2dc50-679e-4e7f-9953-0b4a5c3291be&pbi_source=linkShare',
+    url: 'https://app.powerbi.com/reportEmbed?reportId=5f4aaea4-c070-4de6-b0fc-eaa054833c74&autoAuth=true&ctid=4fa2dc50-679e-4e7f-9953-0b4a5c3291be',
     title: 'PowerBI'
   },
   {
