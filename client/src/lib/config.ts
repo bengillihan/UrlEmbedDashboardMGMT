@@ -6,12 +6,12 @@ export const DASHBOARD_URLS = [
   },
   {
     id: 'powerbi',
-    url: 'https://app.powerbi.com/reportEmbed?reportId=db4665f9-bb0f-42ef-ac87-a0172e6573fb&autoAuth=true&ctid=4fa2dc50-679e-4e7f-9953-0b4a5c3291be',
+    url: 'https://app.powerbi.com/groups/62f11417-9444-43af-b88e-1e48c1ff3ff5/reports/5f4aaea4-c070-4de6-b0fc-eaa054833c74/7a06c9eaa406f6e7a836?experience=power-bi',
     title: 'PowerBI'
   },
   {
     id: 'quickbase',
-    url: 'https://americanpower.quickbase.com/db/bp5hq3uqm/813bccff-c7f4-4298-aa2d-aa36e57ea55e',
+    url: 'https://americanpower.quickbase.com/db/bp5hq3uqm/346357ce-e80e-40bf-897b-6bf70df4c282?a=showpage&pageIdV2=97d7aec8-5ca9-4468-ac59-3635594e0a7a',
     title: 'QuickBase'
   },
   {
