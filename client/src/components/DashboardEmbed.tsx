@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface DashboardEmbedProps {
@@ -12,7 +12,10 @@ interface DashboardEmbedProps {
 export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [key, setKey] = useState(0); // Used to force iframe refresh
+  const [key, setKey] = useState(0);
+
+  // Check if this is the Salesflow dashboard
+  const isSalesflow = title.toLowerCase().includes('salesflow');
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -25,13 +28,32 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
   };
 
   const handleLogin = () => {
-    // Open dashboard in a new tab and start refresh cycle
     window.open(url, '_blank');
   };
 
   const handleRefresh = () => {
-    setKey(prev => prev + 1); // Force iframe refresh
+    setKey(prev => prev + 1);
   };
+
+  // If it's Salesflow, show a button to open in new tab
+  if (isSalesflow) {
+    return (
+      <Card className="w-full h-full">
+        <CardContent className="flex items-center justify-center h-full">
+          <div className="text-center">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">{title} Dashboard</h3>
+            <Button 
+              onClick={handleLogin}
+              className="flex items-center gap-2"
+            >
+              Open in New Tab
+              <ExternalLink className="h-4 w-4" />
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="w-full h-full">
@@ -66,7 +88,7 @@ export function DashboardEmbed({ url, title }: DashboardEmbedProps) {
         )}
 
         <iframe 
-          key={key} // Force refresh when key changes
+          key={key}
           src={url}
           title={title}
           className="w-full h-full border-0"
